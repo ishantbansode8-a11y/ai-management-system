@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>EcoAI - Waste Management</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            ♻️ EcoAI
+        </div>
+
+        <div class="nav-links">
+
+            <button onclick="showPage('home')">
+                Home
+            </button>
+
+            <button onclick="showPage('scanner')">
+                AI Scanner
+            </button>
+
+            <button onclick="showPage('reports')">
+                My Reports
+            </button>
+
+            <button onclick="showPage('admin')">
+                Admin
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HOME -->
+
+    <section id="home" class="page active">
+
+        <div class="hero">
+
+            <div class="hero-text">
+
+                <p class="tag">
+                    AI POWERED WASTE MANAGEMENT
+                </p>
+
+                <h1>
+                    Make Waste
+                    <span>Smarter.</span>
+                </h1>
+
+                <p class="hero-description">
+
+                    Identify your waste using Artificial
+                    Intelligence and learn how to dispose
+                    of it responsibly.
+
+                </p>
+
+                <button class="primary-btn"
+                        onclick="showPage('scanner')">
+
+                    🔍 Scan Your Waste
+
+                </button>
+
+            </div>
+
+            <div class="hero-card">
+
+                <div class="scan-icon">
+                    ♻️
+                </div>
+
+                <h3>
+                    AI Waste Scanner
+                </h3>
+
+                <p>
+                    Upload a waste image and our AI
+                    will identify its category.
+                </p>
+
+                <div class="mini-stats">
+
+                    <div>
+                        <strong>7+</strong>
+                        <small>Categories</small>
+                    </div>
+
+                    <div>
+                        <strong>AI</strong>
+                        <small>Powered</small>
+                    </div>
+
+                    <div>
+                        <strong>24/7</strong>
+                        <small>Available</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI Classification
+                </h3>
+
+                <p>
+                    Identify different types of waste
+                    using image classification.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ♻️
+                </div>
+
+                <h3>
+                    Disposal Guidance
+                </h3>
+
+                <p>
+                    Get simple instructions for
+                    responsible disposal.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📍
+                </div>
+
+                <h3>
+                    Waste Reporting
+                </h3>
+
+                <p>
+                    Report improperly disposed waste
+                    and its location.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AI SCANNER -->
+
+    <section id="scanner" class="page">
+
+        <div class="page-heading">
+
+            <p class="tag">
+                ARTIFICIAL INTELLIGENCE
+            </p>
+
+            <h1>
+                AI Waste Scanner
+            </h1>
+
+            <p>
+                Upload an image to identify the waste category.
+            </p>
+
+        </div>
+
+
+        <div class="scanner-container">
+
+            <div class="upload-box">
+
+                <div class="upload-icon">
+                    📷
+                </div>
+
+                <h2>
+                    Upload Waste Image
+                </h2>
+
+                <p>
+                    JPG, JPEG or PNG
+                </p>
+
+                <input
+                    type="file"
+                    id="wasteImage"
+                    accept="image/*"
+                    onchange="previewImage()"
+                >
+
+                <label for="wasteImage"
+                       class="upload-button">
+
+                    Choose Image
+
+                </label>
+
+                <div id="previewContainer">
+
+                    <img id="preview"
+                         alt="Waste preview">
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    onclick="analyzeWaste()">
+
+                    🤖 Analyze Waste
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div id="resultCard"
+                 class="result-card hidden">
+
+                <div class="result-header">
+
+                    <span>
+                        AI ANALYSIS
+                    </span>
+
+                    <span class="status">
+                        ✓ Complete
+                    </span>
+
+                </div>
+
+
+                <div class="result-main">
+
+                    <div class="result-image">
+
+                        <img id="resultImage"
+                             alt="Waste">
+
+                    </div>
+
+
+                    <div class="result-info">
+
+                        <p class="result-label">
+                            Detected Category
+                        </p>
+
+                        <h2 id="category">
+                            Plastic
+                        </h2>
+
+                        <div class="confidence">
+
+                            <div class="confidence-top">
+
+                                <span>
+                                    Confidence
+                                </span>
+
+                                <strong id="confidence">
+                                    94%
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div id="progressBar">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="disposal">
+
+                    <h3>
+                        ♻️ Disposal Recommendation
+                    </h3>
+
+                    <p id="disposalText">
+                        Place the item in recyclable
+                        plastic waste.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="report-btn"
+                    onclick="openReport()">
+
+                    📍 Report Waste
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REPORT -->
+
+    <section id="report" class="page">
+
+        <div class="page-heading">
+
+            <p class="tag">
+                REPORT WASTE
+            </p>
+
+            <h1>
+                Report Improperly Disposed Waste
+            </h1>
+
+            <p>
+                Help keep your surroundings clean.
+            </p>
+
+        </div>
+
+
+        <div class="report-form">
+
+            <label>
+                Waste Category
+            </label>
+
+            <input
+                type="text"
+                id="reportCategory"
+                readonly
+            >
+
+
+            <label>
+                Location
+            </label>
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Enter location"
+            >
+
+
+            <label>
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Describe the waste..."
+            ></textarea>
+
+
+            <button
+                class="primary-btn"
+                onclick="submitReport()">
+
+                Submit Report
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- REPORTS -->
+
+    <section id="reports" class="page">
+
+        <div class="page-heading">
+
+            <p class="tag">
+                TRACKING
+            </p>
+
+            <h1>
+                My Reports
+            </h1>
+
+        </div>
+
+
+        <div id="reportList"
+             class="report-list">
+
+            <div class="empty">
+
+                <div>
+                    📋
+                </div>
+
+                <h3>
+                    No reports yet
+                </h3>
+
+                <p>
+                    Your submitted waste reports
+                    will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADMIN -->
+
+    <section id="admin" class="page">
+
+        <div class="page-heading">
+
+            <p class="tag">
+                ADMIN PANEL
+            </p>
+
+            <h1>
+                Waste Management Dashboard
+            </h1>
+
+        </div>
+
+
+        <div class="dashboard-stats">
+
+            <div class="stat-card">
+
+                <span>
+                    📋
+                </span>
+
+                <h2 id="totalReports">
+                    0
+                </h2>
+
+                <p>
+                    Total Reports
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    ⏳
+                </span>
+
+                <h2 id="pendingReports">
+                    0
+                </h2>
+
+                <p>
+                    Pending
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    ♻️
+                </span>
+
+                <h2 id="collectedReports">
+                    0
+                </h2>
+
+                <p>
+                    Collected
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    🤖
+                </span>
+
+                <h2>
+                    AI
+                </h2>
+
+                <p>
+                    Classification
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-table">
+
+            <h2>
+                Recent Waste Reports
+            </h2>
+
+            <div id="adminReports">
+
+                <p class="empty">
+                    No reports available.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            ♻️ EcoAI — AI-Based Waste Management System
+        </p>
+
+        <p>
+            Technical Seminar | CSE | 2026–27
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
